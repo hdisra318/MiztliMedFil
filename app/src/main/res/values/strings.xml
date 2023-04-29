@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">MedFil</string>
+
+    <!-- Cadenas para pantalla "A cerca de" -->
+    <string name="team_name">Miztli</string>
+    <string name="intro_acerca_de">Aplicación móvil que muestra filtros de enfemedades/condiciones.</string>
+    <string name="idea_original_text">Idea Original:</string>
+    <string name="dra_name">Dra. Mahuina Campos</string>
+    <string name="desarrolladores_text">Desarrolladores:</string>
+    <string name="desarrollador_1">Israel Hernández Dorantes</string>
+    <string name="desarrollador_2">Juan Manuel Lucio</string>
+    <string name="desarrollador_3">Rubén Acosta Arzate</string>
+    <string name="desarrollador_4">Frida Huitrón Badillo</string>
+
 </resources>
