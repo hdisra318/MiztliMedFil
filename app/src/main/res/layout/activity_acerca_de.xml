@@ -33,6 +33,7 @@
                     android:layout_marginRight="60dp"
                     app:srcCompat="@mipmap/ic_launcher" />
 
+                <!--
                 <TextView
                     android:id="@+id/miztliName"
                     android:layout_width="wrap_content"
@@ -42,7 +43,16 @@
                     android:text="@string/team_name"
                     android:textColor="@color/black"
                     android:textSize="@dimen/font_logo"
-                    android:textStyle="italic" />
+                    android:textStyle="italic" /> -->
+
+                <ImageView
+                    android:id="@+id/logoMiztli"
+                    android:layout_width="130dp"
+                    android:layout_height="120dp"
+                    android:layout_marginLeft="60dp"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/logo_miztli" />
+
             </LinearLayout>
 
             <TextView
