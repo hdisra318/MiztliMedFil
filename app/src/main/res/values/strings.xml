@@ -11,5 +11,9 @@
     <string name="desarrollador_2">Juan Manuel Lucio</string>
     <string name="desarrollador_3">Rubén Acosta Arzate</string>
     <string name="desarrollador_4">Frida Huitrón Badillo</string>
+    <string name="opc1">Menú de Filtros</string>
+    <string name="opc2">Creditos</string>
+    <string name="open">Open Navigation Drawer</string>
+    <string name="close">Close Navigation Drawer</string>
 
 </resources>
