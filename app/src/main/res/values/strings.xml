@@ -5,6 +5,7 @@
     <string name="team_name">Miztli</string>
     <string name="intro_acerca_de">Aplicación móvil que muestra filtros de enfemedades/condiciones.</string>
     <string name="idea_original_text">Idea Original:</string>
+    <string name="Pantalla_filtros_text">Pantalla filtros:</string>
     <string name="dra_name">Dra. Mahuina Campos</string>
     <string name="desarrolladores_text">Desarrolladores:</string>
     <string name="desarrollador_1">Israel Hernández Dorantes</string>
@@ -15,5 +16,6 @@
     <string name="opc2">Creditos</string>
     <string name="open">Open Navigation Drawer</string>
     <string name="close">Close Navigation Drawer</string>
+
 
 </resources>
