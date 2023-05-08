@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.menufiltros:{
                         Toast.makeText(MainActivity.this, "Menu de filtros Seleccionado",
                                 Toast.LENGTH_SHORT).show();
-                        setContentView(R.layout.pantalla_filtros);
+                        setContentView(R.layout.activity_pantalla_filtros);
                     }
                     case R.id.creditos:{
                         Toast.makeText(MainActivity.this, "Creditos Seleccionado",

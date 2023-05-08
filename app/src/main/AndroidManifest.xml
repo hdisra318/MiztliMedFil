@@ -13,6 +13,9 @@
         android:theme="@style/Theme.MedFil"
         tools:targetApi="31">
         <activity
+            android:name=".Pantalla_filtros"
+            android:exported="false" />
+        <activity
             android:name=".AcercaDeActivity"
             android:exported="false">
             <meta-data
