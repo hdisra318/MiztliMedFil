@@ -12,4 +12,11 @@
     <string name="desarrollador_3">Rubén Acosta Arzate</string>
     <string name="desarrollador_4">Frida Huitrón Badillo</string>
 
+    <!-- Menu -->
+    <string name="selec_filtro">Selección de filtro</string>
+    <string name="creditos">A cerca de</string>
+    <string name="open_nav">Open Navigation Drawer</string>
+    <string name="close_nav">Close Navigation Drawer</string>
+
+
 </resources>
