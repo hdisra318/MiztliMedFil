@@ -1,19 +1,21 @@
 package mx.unam.fciencias.medfil;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.PixelCopy;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -39,7 +41,7 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
-public class FiltroActivity extends AppCompatActivity {
+public class FiltroFragment extends Fragment {
 
     /** Referencia al fragmento de SceneView */
     private ArFrontFacingFragment fragmentRostorRA;
@@ -60,22 +62,30 @@ public class FiltroActivity extends AppCompatActivity {
     private ModelRenderable modeloRostro;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_filtro);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
-        getSupportFragmentManager().addFragmentOnAttachListener(this::onAttachFragment);
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_filtro, container, false);
+    }
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        getActivity().getSupportFragmentManager().addFragmentOnAttachListener(this::onAttachFragment);
 
         if(savedInstanceState == null){
 
-            if (Sceneform.isSupported(this)) {
-                getSupportFragmentManager().beginTransaction().add(R.id.vista_ra_fl_1,
+            if (Sceneform.isSupported(getActivity())) {
+                getActivity().getSupportFragmentManager().beginTransaction().add(R.id.vista_ra_fl_1,
                         ArFrontFacingFragment.class, null).commit();
             }
         }
 
         // Asociando el boton de captura a los metodos
-        ImageButton botonCaptura = findViewById(R.id.captura_btn);
+        ImageButton botonCaptura = getActivity().findViewById(R.id.captura_btn_2);
         botonCaptura.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -94,12 +104,12 @@ public class FiltroActivity extends AppCompatActivity {
     private void loadTextures() {
 
         // Cargando 1 filtro
-        cargadores.add((Texture.builder()).setSource(this, Uri.parse("freckles.png"))
+        cargadores.add((Texture.builder()).setSource(getActivity(), Uri.parse("freckles.png"))
                 .setUsage(Texture.Usage.COLOR_MAP)
                 .build()
                 .thenAccept(texture -> texturaRostro = texture)
                 .exceptionally(throwable -> {
-                    Toast.makeText(this, "No se logro cargar la textura",
+                    Toast.makeText(getActivity(), "No se logro cargar la textura",
                             Toast.LENGTH_LONG).show();
                     return null;
                 }));
@@ -177,7 +187,7 @@ public class FiltroActivity extends AppCompatActivity {
 
     /* Liberando los recursos de la app */
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
 
         cancelaCargadores();
@@ -217,15 +227,15 @@ public class FiltroActivity extends AppCompatActivity {
 
                 }catch (IOException ioe) {
 
-                    Toast.makeText(FiltroActivity.this, ioe.toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), ioe.toString(), Toast.LENGTH_LONG).show();
                     return;
                 }
 
-                Toast.makeText(FiltroActivity.this, "Captura guardada", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Captura guardada", Toast.LENGTH_LONG).show();
 
             } else {
 
-                Toast.makeText(FiltroActivity.this, "No se pudo realizazr la captura", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "No se pudo realizazr la captura", Toast.LENGTH_LONG).show();
 
             }
 
@@ -262,12 +272,12 @@ public class FiltroActivity extends AppCompatActivity {
     private void loadModels() {
 
         cargadores.add(ModelRenderable.builder()
-                .setSource(this, Uri.parse("fox.glb"))
+                .setSource(getActivity(), Uri.parse("fox.glb"))
                 .setIsFilamentGltf(true)
                 .build()
                 .thenAccept(model -> modeloRostro = model)
                 .exceptionally(throwable -> {
-                    Toast.makeText(this, "No pudo cargarse el rendereable",
+                    Toast.makeText(getActivity(), "No pudo cargarse el rendereable",
                             Toast.LENGTH_LONG).show();
                     return null;
                 }));
