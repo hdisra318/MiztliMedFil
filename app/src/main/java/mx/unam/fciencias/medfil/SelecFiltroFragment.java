@@ -14,14 +14,15 @@ import android.widget.Toast;
 
 public class SelecFiltroFragment extends Fragment {
 
+    /** Vista a inflar */
     View view;
+
+    /** Boton para abrir un filtro */
     Button btn;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        Button b = (Button) getActivity().findViewById(R.id.button);
 
 
     }
@@ -39,8 +40,8 @@ public class SelecFiltroFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FiltroFragment()).commit();
-                startActivity(intent);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FiltroFragment()).commit();
+                //startActivity(intent);
             }
         });
 

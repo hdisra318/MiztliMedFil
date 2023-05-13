@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.PixelCopy;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -61,18 +62,14 @@ public class FiltroFragment extends Fragment {
     /** Almacena el modelo 3D */
     private ModelRenderable modeloRostro;
 
+    /** Boton de captura de pantalla */
+    private ImageButton botonCaptura;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_filtro, container, false);
-    }
-
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        View view = inflater.inflate(R.layout.fragment_filtro, container, false);
 
         getActivity().getSupportFragmentManager().addFragmentOnAttachListener(this::onAttachFragment);
 
@@ -85,16 +82,27 @@ public class FiltroFragment extends Fragment {
         }
 
         // Asociando el boton de captura a los metodos
-        ImageButton botonCaptura = getActivity().findViewById(R.id.captura_btn_2);
+        botonCaptura = getActivity().findViewById(R.id.captura_btn_2);
         botonCaptura.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                makeScreenShot();
+                System.out.println("Presionado");
+                //makeScreenShot();
             }
         });
 
         loadTextures();
+
+        // Inflate the layout for this fragment
+        return view;
+    }
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
 
     }
 
