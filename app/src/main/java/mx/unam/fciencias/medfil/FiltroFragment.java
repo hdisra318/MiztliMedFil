@@ -1,6 +1,9 @@
 package mx.unam.fciencias.medfil;
 
+import android.app.Dialog;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -11,13 +14,19 @@ import androidx.fragment.app.FragmentManager;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.PixelCopy;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.ar.core.AugmentedFace;
@@ -65,6 +74,15 @@ public class FiltroFragment extends Fragment {
     /** Boton de captura de pantalla */
     private ImageButton botonCaptura;
 
+    /** Boton para desplegar el dialogo con la informacion de la enfermedad actual */
+    ImageButton infoBtn;
+
+    /** Bandera que indica cuando se activa y desactiva el filtro */
+    boolean filtroActivado;
+
+    /** Boton Switch de activar/desactivar filtro */
+    Switch activarFiltroBtn;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -82,14 +100,44 @@ public class FiltroFragment extends Fragment {
         }
 
         // Asociando el boton de captura a los metodos
-        botonCaptura = getActivity().findViewById(R.id.captura_btn_2);
+        botonCaptura = view.findViewById(R.id.captura_btn_2);
         botonCaptura.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                System.out.println("Presionado");
-                //makeScreenShot();
+                makeScreenShot();
             }
+        });
+
+        // Boton de la informacion
+        infoBtn = (ImageButton) view.findViewById(R.id.info_filtro_1_btn);
+
+        infoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showBottomDialog();
+            }
+        });
+
+        // Swicth para activar y desactivar el filtro
+        activarFiltroBtn = (Switch) view.findViewById(R.id.activar_filtro_btn);
+
+        activarFiltroBtn.setOnCheckedChangeListener((compoundButton, isChecked) -> {
+
+            // Si se activo
+            if(isChecked){
+
+                System.out.println("Activado");
+                filtroActivado = true;
+
+            } else { // Si se desactivo
+
+                System.out.println("Desactivado");
+                filtroActivado = false;
+
+            }
+
+
         });
 
         loadTextures();
@@ -357,5 +405,49 @@ public class FiltroFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
+
+    /**
+     * Muestra el dialogo con la informacion de la enfermedad/condicion actual
+     */
+    private void showBottomDialog() {
+
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.filtro_info_layout);
+
+        ImageView cancelBtn = dialog.findViewById(R.id.cancelButton);
+        LinearLayout infoText = dialog.findViewById(R.id.layoutInfoText);
+        TextView textoEnfermedad = dialog.findViewById(R.id.textoEnf);
+        TextView nombreEnfermedad = dialog.findViewById(R.id.nombreEnf);
+
+        // Agregando texto de la informacion de la enferemdad
+        nombreEnfermedad.setText("Lúpica");
+
+        String info = "Se presenta en el lupus vulgar y en menos frecuencia, en el lupus eritematoso\n"+
+                "Características:\n\n"+
+                "1. Eritema malar: eritema fijo, plano o elevado, sobre las prominencias malares, sin afectación de los pliegues nasolabiales.\n"+
+                "2. Erupción discoide: placas eritematosas elevadas con descamación queratósica adherente; en lesiones antiguas, puede ocurrir cicatrización atrófica.\n"+
+                "3. Fotosensibilidad: erupción cutánea como resultado de una reacción inusual a los rayos solares, por historia u observación del médico.\n"+
+                "4. Úlceras orales: ulceración oral o nasofaríngea, usualmente indolora, observada por el médico.\n";
+
+        textoEnfermedad.setText(info);
+
+        // Accion del boton para quitar el dialogo
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+
+        dialog.show();
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
+
+
+    }
 
 }

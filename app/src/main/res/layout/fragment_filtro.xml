@@ -31,6 +31,37 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
 
+        <ImageButton
+            android:id="@+id/info_filtro_1_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_baseline_info_24"
+            android:clickable="true"
+            android:focusable="true"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            android:layout_marginStart="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Switch
+            android:id="@+id/activar_filtro_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:textOff="@string/inactive_filtro"
+            android:textOn="@string/active_filtro"
+            android:thumb="@drawable/thumb_btn"
+            android:track="@drawable/track"
+            android:layout_margin="@dimen/margin_switch_boton"
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
