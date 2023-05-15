@@ -83,6 +83,9 @@ public class FiltroFragment extends Fragment {
     /** Boton Switch de activar/desactivar filtro */
     Switch activarFiltroBtn;
 
+    /** Bandera que indica si ya se presiono una vez el boton de informacion */
+    boolean unaVezInfo = false;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -115,6 +118,7 @@ public class FiltroFragment extends Fragment {
         infoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 showBottomDialog();
             }
         });
@@ -446,8 +450,6 @@ public class FiltroFragment extends Fragment {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
-
-
     }
 
 }
