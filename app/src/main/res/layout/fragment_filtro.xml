@@ -25,8 +25,8 @@
             android:background="?android:attr/listChoiceIndicatorSingle"
             android:clickable="true"
             android:focusable="true"
-            android:minWidth="48dp"
-            android:minHeight="48dp"
+            android:minWidth="58dp"
+            android:minHeight="58dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>

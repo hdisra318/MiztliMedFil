@@ -29,9 +29,6 @@ public class SelecFiltroFragment extends Fragment {
     /** Vista a inflar */
     View view;
 
-    /** Boton para abrir un filtro */
-    Button btn;
-
     /** Grid de la galeria de filtros */
     GridView grid;
 
@@ -50,18 +47,6 @@ public class SelecFiltroFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_selec_filtro, container, false);
-
-        /*btn = (Button) view.findViewById(R.id.button);
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                // Mostrando el fragmento del filtro
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FiltroFragment()).commit();
-
-            }
-        });*/
 
         grid = (GridView) view.findViewById(R.id.gridView);
         GridAdapter gridAdapter = new GridAdapter(getContext(), filtros);
