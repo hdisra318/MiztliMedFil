@@ -21,31 +21,13 @@
             android:textColor="@color/verde_azul"
             android:textSize="30sp" />
 
-        <ScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp">
-
             <GridView
                 android:id="@+id/gridView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:numColumns="2"
-                android:padding="2dp" />
-
-        </ScrollView>
-
-        <!--
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="Abrir filtro"
-            android:textAllCaps="false"
-            android:backgroundTint="@color/rojo"
-            /> -->
+                android:padding="2dp"
+                android:layout_marginTop="8dp"/>
 
 
     </LinearLayout>

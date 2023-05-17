@@ -58,7 +58,6 @@
             android:thumb="@drawable/thumb_btn"
             android:track="@drawable/track"
             android:layout_margin="@dimen/margin_switch_boton"
-            android:background="@android:color/transparent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
