@@ -452,4 +452,14 @@ public class FiltroFragment extends Fragment {
         dialog.getWindow().setGravity(Gravity.BOTTOM);
     }
 
+
+    /* OnBack o en Finish */
+    /*
+    @Override
+    protected void finish() {
+        super.finish();
+
+
+
+    }*/
 }
