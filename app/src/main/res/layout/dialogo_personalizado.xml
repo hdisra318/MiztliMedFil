@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside"
+            android:layout_gravity="center"
+            android:background="@color/white"
+            android:src="@mipmap/ic_launcher"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:padding="15dp"
+            android:justificationMode="inter_word"
+            android:text="@string/titulo_dialogo"
+            android:fontFamily="@font/rubik"
+            android:textColor="@color/kelly_blue"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:padding="15dp"
+            android:justificationMode="inter_word"
+            android:text="@string/contenido_dialogo"
+            android:fontFamily="@font/rubik"
+            android:textColor="@color/black"/>
+
+        <!--
+        <Button
+            android:id="@+id/comienza_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="@string/boton_comienza"
+            android:backgroundTint="@color/mint_soft" /> -->
+
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+
+

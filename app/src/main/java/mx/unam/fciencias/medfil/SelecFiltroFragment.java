@@ -1,12 +1,15 @@
 package mx.unam.fciencias.medfil;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.view.Gravity;
@@ -35,10 +38,29 @@ public class SelecFiltroFragment extends Fragment {
     /** Imagenes de los filtros */
     int[] filtros = {R.drawable.filtro1, R.drawable.filtro1, R.drawable.filtro1, R.drawable.filtro1, R.drawable.filtro1};
 
+    /** Referencia al dialogo de bienvenida */
+    private DialogoPersonalizado dialogoPersonalizado;
+
+    /** Bandera que indica si ya se mostro por primera vez en la aplicacion el dialogo */
+    boolean firstStart;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        SharedPreferences preferences = getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        firstStart= preferences.getBoolean("firstStart", true);
+
+        if (firstStart) {
+            if (dialogoPersonalizado == null) {
+                dialogoPersonalizado = new DialogoPersonalizado();
+            }
+            dialogoPersonalizado.show(getActivity().getSupportFragmentManager(), "FOSS");
+
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putBoolean("firstStart", false);
+            editor.apply();
+        }
 
     }
 
@@ -60,6 +82,9 @@ public class SelecFiltroFragment extends Fragment {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FiltroFragment()).commit();
             }
         });
+
+
+
 
         // Inflate the layout for this fragment
         return view;

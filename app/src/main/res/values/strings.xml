@@ -23,4 +23,9 @@
     <string name="inactive_filtro">Off</string>
 
 
+    <!-- Cadenas del dialogo de bienvenida -->
+    <string name="titulo_dialogo">Bienvenidos a MedFil</string>
+    <string name="contenido_dialogo">MedFil es una aplicación móvil con carácter médico-educativo que busca apoyarte a ti estudiante de medicina en la identificación de facies, mediante la utilización de filtros que te permitan ver estas enfermedades/condiciones en distintas etapas y como lucen estas en gente cotidiana</string>
+    <string name="boton_comienza">Comienza</string>
+
 </resources>
