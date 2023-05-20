@@ -16,11 +16,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:textStyle="bold"
+            android:fontFamily="@font/rubik"
             android:text="@string/selec_filtro"
-            android:fontFamily="@font/baskerville_normal"
-            android:textColor="@color/white"
-            android:textSize="30sp" />
+            android:textColor="@color/kelly_blue"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
             <GridView
                 android:id="@+id/gridView"
