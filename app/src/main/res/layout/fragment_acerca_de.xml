@@ -51,6 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15dp"
+                    android:fontFamily="@font/baskerville_normal"
                     android:text="@string/intro_acerca_de"
                     android:textSize="@dimen/font_size_1" />
 
@@ -59,6 +60,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/baskerville_normal"
                     android:text="@string/idea_original_text"
                     android:textSize="@dimen/font_size_1"
                     android:textStyle="bold" />
@@ -68,6 +70,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15dp"
+                    android:fontFamily="@font/baskerville_normal"
                     android:text="@string/dra_name"
                     android:textSize="@dimen/font_size_1" />
 
@@ -76,6 +79,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/baskerville_normal"
                     android:text="@string/desarrolladores_text"
                     android:textSize="@dimen/font_size_1"
                     android:textStyle="bold" />
@@ -98,6 +102,7 @@
                         android:id="@+id/desarrollador1"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:fontFamily="@font/baskerville_normal"
                         android:text="@string/desarrollador_1"
                         android:textSize="@dimen/font_size_1" />
 
@@ -121,6 +126,7 @@
                         android:id="@+id/desarrollador2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/baskerville_normal"
                         android:text="@string/desarrollador_2"
                         android:textSize="@dimen/font_size_1" />
                 </LinearLayout>
@@ -142,6 +148,7 @@
                         android:id="@+id/desarrollador3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/baskerville_normal"
                         android:text="@string/desarrollador_3"
                         android:textSize="@dimen/font_size_1" />
                 </LinearLayout>
@@ -163,6 +170,7 @@
                         android:id="@+id/desarrollador4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/baskerville_normal"
                         android:text="@string/desarrollador_4"
                         android:textSize="@dimen/font_size_1" />
 

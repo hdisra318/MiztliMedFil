@@ -18,7 +18,8 @@
             android:layout_marginTop="10dp"
             android:textStyle="bold"
             android:text="@string/selec_filtro"
-            android:textColor="@color/verde_azul"
+            android:fontFamily="@font/baskerville_normal"
+            android:textColor="@color/white"
             android:textSize="30sp" />
 
             <GridView
