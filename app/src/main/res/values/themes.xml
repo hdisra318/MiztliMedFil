@@ -14,7 +14,16 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <!-- Splash Screen -->
     <style name="splashTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@drawable/splashscreen</item>
     </style>
+
+    <!-- Dialogo de informacion de la enfermedad/condicon -->
+    <style name="DialogAnimation">
+
+        <item name="android:windowEnterAnimation">@anim/slide_in_animation</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_animation</item>
+    </style>
+
 </resources>

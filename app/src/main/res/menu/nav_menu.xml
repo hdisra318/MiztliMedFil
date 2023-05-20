@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn = "navigation_view">
+
+    <group
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_selec_filtro"
+            android:icon="@drawable/ic_baseline_image_24"
+            android:title="Selección de filtro" />
+
+        <item
+            android:id="@+id/nav_creditos"
+            android:icon="@drawable/ic_baseline_people_24"
+            android:title="Créditos" />
+
+    </group>
+
+</menu>
