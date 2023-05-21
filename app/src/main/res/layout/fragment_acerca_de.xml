@@ -53,6 +53,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15dp"
                     android:fontFamily="@font/rubik"
+                    android:textColor="@color/kelly_blue"
                     android:text="@string/intro_acerca_de"
                     android:textSize="@dimen/font_size_1" />
 
@@ -63,6 +64,7 @@
                     android:layout_marginBottom="10dp"
                     android:fontFamily="@font/rubik"
                     android:text="@string/idea_original_text"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/font_size_1"
                     android:textStyle="bold" />
 
@@ -72,6 +74,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15dp"
                     android:fontFamily="@font/rubik"
+                    android:textColor="@color/kelly_blue"
                     android:text="@string/dra_name"
                     android:textSize="@dimen/font_size_1" />
 
@@ -81,6 +84,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:fontFamily="@font/rubik"
+                    android:textColor="@color/black"
                     android:text="@string/desarrolladores_text"
                     android:textSize="@dimen/font_size_1"
                     android:textStyle="bold" />
@@ -105,6 +109,7 @@
                         android:layout_height="match_parent"
                         android:fontFamily="@font/rubik"
                         android:text="@string/desarrollador_1"
+                        android:textColor="@color/kelly_blue"
                         android:textSize="@dimen/font_size_1" />
 
 
@@ -128,6 +133,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/rubik"
+                        android:textColor="@color/kelly_blue"
                         android:text="@string/desarrollador_2"
                         android:textSize="@dimen/font_size_1" />
                 </LinearLayout>
@@ -151,6 +157,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/rubik"
                         android:text="@string/desarrollador_3"
+                        android:textColor="@color/kelly_blue"
                         android:textSize="@dimen/font_size_1" />
                 </LinearLayout>
 
@@ -173,6 +180,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/rubik"
                         android:text="@string/desarrollador_4"
+                        android:textColor="@color/kelly_blue"
                         android:textSize="@dimen/font_size_1" />
 
                 </LinearLayout>

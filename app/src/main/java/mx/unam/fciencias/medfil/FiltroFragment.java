@@ -119,7 +119,6 @@ public class FiltroFragment extends Fragment {
         infoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 showBottomDialog();
             }
         });
