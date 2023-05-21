@@ -134,18 +134,19 @@ public class FiltroFragment extends Fragment {
 
                 System.out.println("Activado");
                 filtroActivado = true;
+                loadTextures();
 
             } else { // Si se desactivo
 
                 System.out.println("Desactivado");
                 filtroActivado = false;
+                cancelaCargadores();
 
             }
 
 
         });
 
-        loadTextures();
 
         // Inflate the layout for this fragment
         return view;
@@ -172,8 +173,8 @@ public class FiltroFragment extends Fragment {
      */
     private void loadTextures() {
 
-        // Cargando 1 filtro
-        cargadores.add((Texture.builder()).setSource(getActivity(), Uri.parse("freckles.png"))
+        // Cargando 1 filtro Lupica
+        cargadores.add((Texture.builder()).setSource(getActivity(), Uri.parse("filtro_lupica.png"))
                 .setUsage(Texture.Usage.COLOR_MAP)
                 .build()
                 .thenAccept(texture -> texturaRostro = texture)
@@ -434,7 +435,7 @@ public class FiltroFragment extends Fragment {
         TextView nombreEnfermedad = dialog.findViewById(R.id.nombreEnf);
 
         // Agregando texto de la informacion de la enferemdad
-        nombreEnfermedad.setText("Lúpica");
+        nombreEnfermedad.setText("Lupus eritematoso");
 
         String info = "Se presenta en el lupus vulgar y en menos frecuencia, en el lupus eritematoso\n"+
                 "Características:\n\n"+

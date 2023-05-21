@@ -1,31 +1,17 @@
 package mx.unam.fciencias.medfil;
 
-import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class SelecFiltroFragment extends Fragment {
 
@@ -36,7 +22,7 @@ public class SelecFiltroFragment extends Fragment {
     GridView grid;
 
     /** Imagenes de los filtros */
-    int[] filtros = {R.drawable.filtro1, R.drawable.filtro1, R.drawable.filtro1, R.drawable.filtro1, R.drawable.filtro1};
+    int[] filtros = {R.drawable.img_lupica};
 
     /** Referencia al dialogo de bienvenida */
     private DialogoPersonalizado dialogoPersonalizado;
