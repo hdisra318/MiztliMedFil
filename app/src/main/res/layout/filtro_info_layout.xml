@@ -31,14 +31,14 @@
                 android:id="@+id/nombreEnf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="5dp"
                 android:gravity="center"
-                android:fontFamily="@font/rubik"
-                android:textSize="25sp"
                 android:padding="8dp"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="5dp" />
+                android:fontFamily="@font/rubik"
+                android:textSize="25sp"
+                android:textStyle="bold" />
 
 
         </LinearLayout>
@@ -66,10 +66,10 @@
                     android:id="@+id/textoEnf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/rubik"
                     android:text=""
                     android:justificationMode="inter_word"
                     android:textColor="@color/black"
+                    android:fontFamily="@font/rubik"
                     android:textSize="20sp" />
 
             </LinearLayout>

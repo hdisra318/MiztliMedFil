@@ -1,5 +1,6 @@
 package mx.unam.fciencias.medfil;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -460,18 +461,6 @@ public class FiltroFragment extends Fragment {
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
     }
-
-
-    /* OnBack o en Finish */
-    /*
-    @Override
-    protected void finish() {
-        super.finish();
-
-
-
-    }*/
-
 
 
 
