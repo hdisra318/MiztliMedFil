@@ -22,7 +22,7 @@ public class SelecFiltroFragment extends Fragment {
     GridView grid;
 
     /** Imagenes de los filtros */
-    int[] filtros = {R.drawable.img_lupica, R.drawable.img_varicela, R.drawable.img_lupica, R.drawable.img_sindrome_down};
+    int[] filtros = {R.drawable.img_lupica, R.drawable.img_varicela, R.drawable.img_sindrome_down};
 
     /** Referencia al dialogo de bienvenida */
     private DialogoPersonalizado dialogoPersonalizado;
