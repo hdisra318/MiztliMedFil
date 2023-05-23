@@ -88,6 +88,13 @@ public class FiltroFragment extends Fragment {
     /** Bandera que indica si ya se presiono una vez el boton de informacion */
     boolean unaVezInfo = false;
 
+    /** Nombre del filtro */
+    String nombreFiltro;
+
+    public FiltroFragment(String filtro){
+        this.nombreFiltro = filtro;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -183,7 +190,7 @@ public class FiltroFragment extends Fragment {
     private void loadTextures() {
 
         // Cargando 1 filtro Lupica
-        cargadores.add((Texture.builder()).setSource(getActivity(), Uri.parse("filtro_lupica.png"))
+        cargadores.add((Texture.builder()).setSource(getActivity(), Uri.parse(nombreFiltro))
                 .setUsage(Texture.Usage.COLOR_MAP)
                 .build()
                 .thenAccept(texture -> texturaRostro = texture)
@@ -454,17 +461,48 @@ public class FiltroFragment extends Fragment {
         TextView textoEnfermedad = dialog.findViewById(R.id.textoEnf);
         TextView nombreEnfermedad = dialog.findViewById(R.id.nombreEnf);
 
-        // Agregando texto de la informacion de la enferemdad
-        nombreEnfermedad.setText("Lupus eritematoso");
 
-        String info = "Se presenta en el lupus vulgar y en menos frecuencia, en el lupus eritematoso\n"+
-                "Características:\n\n"+
-                "1. Eritema malar: eritema fijo, plano o elevado, sobre las prominencias malares, sin afectación de los pliegues nasolabiales.\n"+
-                "2. Erupción discoide: placas eritematosas elevadas con descamación queratósica adherente; en lesiones antiguas, puede ocurrir cicatrización atrófica.\n"+
-                "3. Fotosensibilidad: erupción cutánea como resultado de una reacción inusual a los rayos solares, por historia u observación del médico.\n"+
-                "4. Úlceras orales: ulceración oral o nasofaríngea, usualmente indolora, observada por el médico.\n";
+        if(nombreFiltro == "filtro_lupica.png") {
+            // Agregando texto de la informacion de la enferemdad Lupica
+            nombreEnfermedad.setText("Lupus eritematoso");
 
-        textoEnfermedad.setText(info);
+            String infoLupica = "Se presenta en el lupus vulgar y en menos frecuencia, en el lupus eritematoso\n"+
+                    "Características:\n\n"+
+                    "1. Eritema malar: eritema fijo, plano o elevado, sobre las prominencias malares, sin afectación de los pliegues nasolabiales.\n"+
+                    "2. Erupción discoide: placas eritematosas elevadas con descamación queratósica adherente; en lesiones antiguas, puede ocurrir cicatrización atrófica.\n"+
+                    "3. Fotosensibilidad: erupción cutánea como resultado de una reacción inusual a los rayos solares, por historia u observación del médico.\n"+
+                    "4. Úlceras orales: ulceración oral o nasofaríngea, usualmente indolora, observada por el médico.\n";
+
+            textoEnfermedad.setText(infoLupica);
+
+        } else if (nombreFiltro == "filtro_ictericia.png") {
+
+            // Agregando texto de la informacion de la enferemdad Lupica
+            nombreEnfermedad.setText("Ictericia");
+
+            String infoLupica = "Es una coloración amarilla en la piel, las membranas mucosas o los ojos. El color amarillo proviene de la bilirrubina, un subproducto de los glóbulos rojos viejos.\n"+
+                    "Causas:\n\n"+
+                    "1. Hay demasiados glóbulos rojos que están muriendo o descomponiéndose y pasando al hígado.\n"+
+                    "2. El hígado está sobrecargado o presenta daño.\n"+
+                    "3. La bilirrubina del hígado es incapaz de movilizarse adecuadamente hacia el tubo digestivo.\n";
+
+            textoEnfermedad.setText(infoLupica);
+
+        } else {
+
+            // Agregando texto de la informacion de la enferemdad Lupica para los demas filtros
+            nombreEnfermedad.setText("Lupus eritematoso");
+
+            String infoLupica = "Se presenta en el lupus vulgar y en menos frecuencia, en el lupus eritematoso\n"+
+                    "Características:\n\n"+
+                    "1. Eritema malar: eritema fijo, plano o elevado, sobre las prominencias malares, sin afectación de los pliegues nasolabiales.\n"+
+                    "2. Erupción discoide: placas eritematosas elevadas con descamación queratósica adherente; en lesiones antiguas, puede ocurrir cicatrización atrófica.\n"+
+                    "3. Fotosensibilidad: erupción cutánea como resultado de una reacción inusual a los rayos solares, por historia u observación del médico.\n"+
+                    "4. Úlceras orales: ulceración oral o nasofaríngea, usualmente indolora, observada por el médico.\n";
+
+            textoEnfermedad.setText(infoLupica);
+        }
+
 
         // Accion del boton para quitar el dialogo
         cancelBtn.setOnClickListener(new View.OnClickListener() {

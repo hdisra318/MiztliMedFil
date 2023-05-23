@@ -22,7 +22,7 @@ public class SelecFiltroFragment extends Fragment {
     GridView grid;
 
     /** Imagenes de los filtros */
-    int[] filtros = {R.drawable.img_lupica, R.drawable.img_varicela, R.drawable.img_sindrome_down};
+    int[] filtros = {R.drawable.img_lupica, R.drawable.img_ictericia, R.drawable.img_varicela, R.drawable.img_sindrome_down};
 
     /** Referencia al dialogo de bienvenida */
     private DialogoPersonalizado dialogoPersonalizado;
@@ -64,8 +64,14 @@ public class SelecFiltroFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                // Mostrando el fragmento del filtro
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FiltroFragment()).commit();
+                // Mostrando el fragmento del filtro segun el seleccionado
+                if (i == 0) {
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FiltroFragment("filtro_lupica.png")).commit();
+                }else if (i == 1) {
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FiltroFragment("filtro_ictericia.png")).commit();
+                }else {
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FiltroFragment("filtro_lupica.png")).commit();
+                }
             }
         });
 
