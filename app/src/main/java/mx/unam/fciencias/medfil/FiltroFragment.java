@@ -139,8 +139,8 @@ public class FiltroFragment extends Fragment {
             } else { // Si se desactivo
 
                 System.out.println("Desactivado");
-                //AugmentedFaceNode nodoRostroExistente = nodosRostros.get(rostroRA);
-                //vistaEscenaRa.getScene().removeChild(nodoRostroExistente);
+
+
                 filtroActivado = false;
                 texturaRostro = null;
                 vistaEscenaRa = null;
@@ -204,35 +204,46 @@ public class FiltroFragment extends Fragment {
 
         AugmentedFaceNode nodoRostroExistente = nodosRostros.get(rostroRA);
 
-        switch (rostroRA.getTrackingState()) {
+        if(!filtroActivado) {
 
-            case TRACKING:
-                if(nodoRostroExistente == null){
-                    if(texturaRostro != null) {
+            if(nodoRostroExistente != null) {
+                vistaEscenaRa.getScene().removeChild(nodoRostroExistente);
+            }
 
-                        aumentaTextura(rostroRA);
+            nodosRostros.remove(rostroRA);
+        }else {
+            switch (rostroRA.getTrackingState()) {
 
-                    } else {
+                case TRACKING:
+                    if (nodoRostroExistente == null) {
+                        if (texturaRostro != null) {
 
-                        aumentaModelo(rostroRA);
+                            aumentaTextura(rostroRA);
 
+                        } else {
+
+                            aumentaModelo(rostroRA);
+
+                        }
+
+                        /*AugmentedFaceNode nodoRostro = new AugmentedFaceNode(rostroRA);
+                        nodoRostro.setFaceMeshTexture(texturaRostro);
+                        vistaEscenaRa.getScene().addChild(nodoRostro);
+                        nodosRostros.put(rostroRA, nodoRostro);*/
+                    }
+                    break;
+
+                case STOPPED:
+                    if (nodoRostroExistente != null) {
+                        vistaEscenaRa.getScene().removeChild(nodoRostroExistente);
                     }
 
-                    /*AugmentedFaceNode nodoRostro = new AugmentedFaceNode(rostroRA);
-                    nodoRostro.setFaceMeshTexture(texturaRostro);
-                    vistaEscenaRa.getScene().addChild(nodoRostro);
-                    nodosRostros.put(rostroRA, nodoRostro);*/
-                }
-                break;
+                    nodosRostros.remove(rostroRA);
+                    break;
+            }
 
-            case STOPPED:
-                if(nodoRostroExistente != null) {
-                    vistaEscenaRa.getScene().removeChild(nodoRostroExistente);
-                }
-
-                nodosRostros.remove(rostroRA);
-                break;
         }
+
     }
 
     /**
