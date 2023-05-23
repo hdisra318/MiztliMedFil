@@ -19,7 +19,7 @@
             android:fontFamily="@font/rubik"
             android:text="@string/selec_filtro"
             android:textColor="@color/kelly_blue"
-            android:textSize="30sp"
+            android:textSize="35sp"
             android:textStyle="bold" />
 
             <GridView
