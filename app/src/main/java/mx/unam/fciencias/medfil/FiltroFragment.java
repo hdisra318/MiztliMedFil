@@ -140,11 +140,16 @@ public class FiltroFragment extends Fragment {
 
                 System.out.println("Desactivado");
 
-
-                filtroActivado = false;
-                texturaRostro = null;
-                vistaEscenaRa = null;
                 cancelaCargadores();
+                for(AugmentedFace rostroAumentado : nodosRostros.keySet()) {
+
+                    AugmentedFaceNode nodoRostroAR = nodosRostros.remove(rostroAumentado);
+                    vistaEscenaRa.getScene().removeChild(nodoRostroAR);
+
+                }
+                filtroActivado = false;
+
+
 
             }
 
