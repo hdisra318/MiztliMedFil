@@ -15,11 +15,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:fontFamily="@font/rubik"
             android:text="@string/selec_filtro"
             android:textColor="@color/kelly_blue"
-            android:textSize="30sp"
+            android:textSize="35sp"
             android:textStyle="bold" />
 
             <GridView

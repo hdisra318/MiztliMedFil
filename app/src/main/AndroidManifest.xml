@@ -19,8 +19,7 @@
         <activity
             android:name=".SplashScreenActivity"
             android:exported="true"
-            android:theme="@style/splashTheme"
-            android:screenOrientation="portrait">
+            android:theme="@style/splashTheme">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

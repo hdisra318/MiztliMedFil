@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="font_size_1">19sp</dimen>
+    <dimen name="font_size_1">25sp</dimen>
     <dimen name="font_logo">35sp</dimen>
     <dimen name="margin_caputura_boton">25dp</dimen>
     <dimen name="margin_switch_boton">35dp</dimen>

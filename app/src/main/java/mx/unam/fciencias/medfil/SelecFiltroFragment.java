@@ -1,28 +1,17 @@
 package mx.unam.fciencias.medfil;
 
-import android.app.Dialog;
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class SelecFiltroFragment extends Fragment {
 
@@ -33,12 +22,31 @@ public class SelecFiltroFragment extends Fragment {
     GridView grid;
 
     /** Imagenes de los filtros */
-    int[] filtros = {R.drawable.filtro1, R.drawable.filtro1, R.drawable.filtro1, R.drawable.filtro1, R.drawable.filtro1};
+    int[] filtros = {R.drawable.img_lupica, R.drawable.img_varicela, R.drawable.img_sindrome_down};
+
+    /** Referencia al dialogo de bienvenida */
+    private DialogoPersonalizado dialogoPersonalizado;
+
+    /** Bandera que indica si ya se mostro por primera vez en la aplicacion el dialogo */
+    boolean firstStart;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        SharedPreferences preferences = getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        firstStart= preferences.getBoolean("firstStart", true);
+
+        if (firstStart) {
+            if (dialogoPersonalizado == null) {
+                dialogoPersonalizado = new DialogoPersonalizado();
+            }
+            dialogoPersonalizado.show(getActivity().getSupportFragmentManager(), "FOSS");
+
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putBoolean("firstStart", false);
+            editor.apply();
+        }
 
     }
 
@@ -60,6 +68,9 @@ public class SelecFiltroFragment extends Fragment {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FiltroFragment()).commit();
             }
         });
+
+
+
 
         // Inflate the layout for this fragment
         return view;

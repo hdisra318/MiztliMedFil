@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -40,7 +41,7 @@
                         android:id="@+id/logoMiztli"
                         android:layout_width="130dp"
                         android:layout_height="120dp"
-                        android:layout_marginLeft="50dp"
+                        android:layout_marginLeft="35dp"
                         android:layout_gravity="center"
                         android:src="@drawable/logo_miztli" />
 
@@ -51,7 +52,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15dp"
-                    android:fontFamily="@font/baskerville_normal"
+                    android:fontFamily="@font/rubik"
+                    android:textColor="@color/kelly_blue"
                     android:text="@string/intro_acerca_de"
                     android:textSize="@dimen/font_size_1" />
 
@@ -60,8 +62,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:fontFamily="@font/baskerville_normal"
+                    android:fontFamily="@font/rubik"
                     android:text="@string/idea_original_text"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/font_size_1"
                     android:textStyle="bold" />
 
@@ -70,7 +73,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15dp"
-                    android:fontFamily="@font/baskerville_normal"
+                    android:fontFamily="@font/rubik"
+                    android:textColor="@color/kelly_blue"
                     android:text="@string/dra_name"
                     android:textSize="@dimen/font_size_1" />
 
@@ -79,7 +83,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:fontFamily="@font/baskerville_normal"
+                    android:fontFamily="@font/rubik"
+                    android:textColor="@color/black"
                     android:text="@string/desarrolladores_text"
                     android:textSize="@dimen/font_size_1"
                     android:textStyle="bold" />
@@ -102,8 +107,9 @@
                         android:id="@+id/desarrollador1"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:fontFamily="@font/baskerville_normal"
+                        android:fontFamily="@font/rubik"
                         android:text="@string/desarrollador_1"
+                        android:textColor="@color/kelly_blue"
                         android:textSize="@dimen/font_size_1" />
 
 
@@ -126,7 +132,8 @@
                         android:id="@+id/desarrollador2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/baskerville_normal"
+                        android:fontFamily="@font/rubik"
+                        android:textColor="@color/kelly_blue"
                         android:text="@string/desarrollador_2"
                         android:textSize="@dimen/font_size_1" />
                 </LinearLayout>
@@ -148,8 +155,9 @@
                         android:id="@+id/desarrollador3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/baskerville_normal"
+                        android:fontFamily="@font/rubik"
                         android:text="@string/desarrollador_3"
+                        android:textColor="@color/kelly_blue"
                         android:textSize="@dimen/font_size_1" />
                 </LinearLayout>
 
@@ -170,19 +178,49 @@
                         android:id="@+id/desarrollador4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/baskerville_normal"
+                        android:fontFamily="@font/rubik"
                         android:text="@string/desarrollador_4"
+                        android:textColor="@color/kelly_blue"
                         android:textSize="@dimen/font_size_1" />
 
                 </LinearLayout>
 
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp">
+
+                    <ImageView
+                        android:id="@+id/logoCienciasImage"
+                        android:layout_width="130dp"
+                        android:layout_height="160dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="24dp"
+                        android:src="@drawable/logo_ciencias"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/logoMedicinaImage"
+                        android:layout_width="130dp"
+                        android:layout_height="160dp"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="24dp"
+                        android:src="@drawable/logo_medicina"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.626"
+                        app:layout_constraintStart_toEndOf="@+id/logoCienciasImage"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
                 <ImageView
-                    android:id="@+id/logoCienciasImage"
-                    android:layout_width="160dp"
-                    android:layout_height="190dp"
+                    android:id="@+id/logoIcatImage"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:src="@drawable/logo_ciencias"
+                    android:src="@drawable/logo_icat"
                     android:layout_marginBottom="30dp"/>
 
 

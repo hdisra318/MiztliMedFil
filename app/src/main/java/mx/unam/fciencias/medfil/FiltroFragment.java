@@ -1,5 +1,6 @@
 package mx.unam.fciencias.medfil;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -119,7 +120,6 @@ public class FiltroFragment extends Fragment {
         infoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 showBottomDialog();
             }
         });
@@ -134,18 +134,28 @@ public class FiltroFragment extends Fragment {
 
                 System.out.println("Activado");
                 filtroActivado = true;
+                loadTextures();
 
             } else { // Si se desactivo
 
                 System.out.println("Desactivado");
+
+                cancelaCargadores();
+                for(AugmentedFace rostroAumentado : nodosRostros.keySet()) {
+
+                    AugmentedFaceNode nodoRostroAR = nodosRostros.remove(rostroAumentado);
+                    vistaEscenaRa.getScene().removeChild(nodoRostroAR);
+
+                }
                 filtroActivado = false;
+
+
 
             }
 
 
         });
 
-        loadTextures();
 
         // Inflate the layout for this fragment
         return view;
@@ -172,8 +182,8 @@ public class FiltroFragment extends Fragment {
      */
     private void loadTextures() {
 
-        // Cargando 1 filtro
-        cargadores.add((Texture.builder()).setSource(getActivity(), Uri.parse("freckles.png"))
+        // Cargando 1 filtro Lupica
+        cargadores.add((Texture.builder()).setSource(getActivity(), Uri.parse("filtro_lupica.png"))
                 .setUsage(Texture.Usage.COLOR_MAP)
                 .build()
                 .thenAccept(texture -> texturaRostro = texture)
@@ -199,35 +209,46 @@ public class FiltroFragment extends Fragment {
 
         AugmentedFaceNode nodoRostroExistente = nodosRostros.get(rostroRA);
 
-        switch (rostroRA.getTrackingState()) {
+        if(!filtroActivado) {
 
-            case TRACKING:
-                if(nodoRostroExistente == null){
-                    if(texturaRostro != null) {
+            if(nodoRostroExistente != null) {
+                vistaEscenaRa.getScene().removeChild(nodoRostroExistente);
+            }
 
-                        aumentaTextura(rostroRA);
+            nodosRostros.remove(rostroRA);
+        }else {
+            switch (rostroRA.getTrackingState()) {
 
-                    } else {
+                case TRACKING:
+                    if (nodoRostroExistente == null) {
+                        if (texturaRostro != null) {
 
-                        aumentaModelo(rostroRA);
+                            aumentaTextura(rostroRA);
 
+                        } else {
+
+                            aumentaModelo(rostroRA);
+
+                        }
+
+                        /*AugmentedFaceNode nodoRostro = new AugmentedFaceNode(rostroRA);
+                        nodoRostro.setFaceMeshTexture(texturaRostro);
+                        vistaEscenaRa.getScene().addChild(nodoRostro);
+                        nodosRostros.put(rostroRA, nodoRostro);*/
+                    }
+                    break;
+
+                case STOPPED:
+                    if (nodoRostroExistente != null) {
+                        vistaEscenaRa.getScene().removeChild(nodoRostroExistente);
                     }
 
-                    /*AugmentedFaceNode nodoRostro = new AugmentedFaceNode(rostroRA);
-                    nodoRostro.setFaceMeshTexture(texturaRostro);
-                    vistaEscenaRa.getScene().addChild(nodoRostro);
-                    nodosRostros.put(rostroRA, nodoRostro);*/
-                }
-                break;
+                    nodosRostros.remove(rostroRA);
+                    break;
+            }
 
-            case STOPPED:
-                if(nodoRostroExistente != null) {
-                    vistaEscenaRa.getScene().removeChild(nodoRostroExistente);
-                }
-
-                nodosRostros.remove(rostroRA);
-                break;
         }
+
     }
 
     /**
@@ -434,7 +455,7 @@ public class FiltroFragment extends Fragment {
         TextView nombreEnfermedad = dialog.findViewById(R.id.nombreEnf);
 
         // Agregando texto de la informacion de la enferemdad
-        nombreEnfermedad.setText("Lúpica");
+        nombreEnfermedad.setText("Lupus eritematoso");
 
         String info = "Se presenta en el lupus vulgar y en menos frecuencia, en el lupus eritematoso\n"+
                 "Características:\n\n"+
@@ -460,18 +481,6 @@ public class FiltroFragment extends Fragment {
         dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         dialog.getWindow().setGravity(Gravity.BOTTOM);
     }
-
-
-    /* OnBack o en Finish */
-    /*
-    @Override
-    protected void finish() {
-        super.finish();
-
-
-
-    }*/
-
 
 
 
