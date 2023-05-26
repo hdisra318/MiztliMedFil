@@ -288,6 +288,12 @@ public class FiltroFragment extends Fragment {
         super.onDestroy();
 
         cancelaCargadores();
+        for(AugmentedFace rostroAumentado : nodosRostros.keySet()) {
+
+            AugmentedFaceNode nodoRostroAR = nodosRostros.remove(rostroAumentado);
+            vistaEscenaRa.getScene().removeChild(nodoRostroAR);
+
+        }
     }
 
     /**
@@ -332,7 +338,7 @@ public class FiltroFragment extends Fragment {
 
             } else {
 
-                Toast.makeText(getActivity(), "No se pudo realizazr la captura", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "No se pudo realizar la captura", Toast.LENGTH_LONG).show();
 
             }
 
@@ -457,7 +463,7 @@ public class FiltroFragment extends Fragment {
         dialog.setContentView(R.layout.filtro_info_layout);
 
         ImageView cancelBtn = dialog.findViewById(R.id.cancelButton);
-        LinearLayout infoText = dialog.findViewById(R.id.layoutInfoText);
+        LinearLayout infoTextCont = dialog.findViewById(R.id.layoutInfoText);
         TextView textoEnfermedad = dialog.findViewById(R.id.textoEnf);
         TextView nombreEnfermedad = dialog.findViewById(R.id.nombreEnf);
 
@@ -466,7 +472,7 @@ public class FiltroFragment extends Fragment {
             // Agregando texto de la informacion de la enferemdad Lupica
             nombreEnfermedad.setText("Lupus eritematoso");
 
-            String infoLupica = "Se presenta en el lupus vulgar y en menos frecuencia, en el lupus eritematoso\n"+
+            String infoLupica = "Se presenta en el lupus vulgar y en menos frecuencia, en el lupus eritematoso\n\n"+
                     "Características:\n\n"+
                     "1. Eritema malar: eritema fijo, plano o elevado, sobre las prominencias malares, sin afectación de los pliegues nasolabiales.\n"+
                     "2. Erupción discoide: placas eritematosas elevadas con descamación queratósica adherente; en lesiones antiguas, puede ocurrir cicatrización atrófica.\n"+
@@ -480,20 +486,20 @@ public class FiltroFragment extends Fragment {
             // Agregando texto de la informacion de la enferemdad Lupica
             nombreEnfermedad.setText("Ictericia");
 
-            String infoLupica = "Es una coloración amarilla en la piel, las membranas mucosas o los ojos. El color amarillo proviene de la bilirrubina, un subproducto de los glóbulos rojos viejos.\n"+
-                    "Causas:\n\n"+
+            String infoIctericia = "Es una coloración amarilla en la piel, las membranas mucosas o los ojos. El color amarillo proviene de la bilirrubina, un subproducto de los glóbulos rojos viejos.\n"+
+                    "\nCausas:\n\n"+
                     "1. Hay demasiados glóbulos rojos que están muriendo o descomponiéndose y pasando al hígado.\n"+
                     "2. El hígado está sobrecargado o presenta daño.\n"+
                     "3. La bilirrubina del hígado es incapaz de movilizarse adecuadamente hacia el tubo digestivo.\n";
 
-            textoEnfermedad.setText(infoLupica);
+            textoEnfermedad.setText(infoIctericia);
 
         } else {
 
             // Agregando texto de la informacion de la enferemdad Lupica para los demas filtros
             nombreEnfermedad.setText("Lupus eritematoso");
 
-            String infoLupica = "Se presenta en el lupus vulgar y en menos frecuencia, en el lupus eritematoso\n"+
+            String infoLupica = "Se presenta en el lupus vulgar y en menos frecuencia, en el lupus eritematoso\n\n"+
                     "Características:\n\n"+
                     "1. Eritema malar: eritema fijo, plano o elevado, sobre las prominencias malares, sin afectación de los pliegues nasolabiales.\n"+
                     "2. Erupción discoide: placas eritematosas elevadas con descamación queratósica adherente; en lesiones antiguas, puede ocurrir cicatrización atrófica.\n"+
