@@ -70,9 +70,6 @@ public class FiltroFragment extends Fragment {
     /** Hashmap que relaciona un rostro detectado con su modelo RA */
     private final HashMap<AugmentedFace, AugmentedFaceNode> nodosRostros = new HashMap<>();
 
-    /** Almacena el modelo 3D */
-    private ModelRenderable modeloRostro;
-
     /** Boton de captura de pantalla */
     private ImageButton botonCaptura;
 
@@ -84,9 +81,6 @@ public class FiltroFragment extends Fragment {
 
     /** Boton Switch de activar/desactivar filtro */
     Switch activarFiltroBtn;
-
-    /** Bandera que indica si ya se presiono una vez el boton de informacion */
-    boolean unaVezInfo = false;
 
     /** Nombre del filtro */
     String nombreFiltro;
@@ -147,6 +141,9 @@ public class FiltroFragment extends Fragment {
 
                 System.out.println("Desactivado");
 
+                if (texturaRostro == null)
+                    return;
+
                 cancelaCargadores();
                 for(AugmentedFace rostroAumentado : nodosRostros.keySet()) {
 
@@ -199,19 +196,16 @@ public class FiltroFragment extends Fragment {
                             Toast.LENGTH_LONG).show();
                     return null;
                 }));
-
-
-        // Para agregar mas filtros usar otro .add
     }
 
     /**
      * Registra los rostros detectados por la camara, revisa si ya fueron procesados y
-     * asociarlos con su modelo 3D o texturas. Y libera modelos que hayan salido de
+     * asociarlos con sus texturas. Y libera modelos que hayan salido de
      * la vista de la camara.
      */
     public void onAugmentedFaceTrackingUpdate(AugmentedFace rostroRA) {
 
-        if(texturaRostro == null && modeloRostro == null)
+        if(texturaRostro == null)
             return;
 
         AugmentedFaceNode nodoRostroExistente = nodosRostros.get(rostroRA);
@@ -232,16 +226,8 @@ public class FiltroFragment extends Fragment {
 
                             aumentaTextura(rostroRA);
 
-                        } else {
-
-                            aumentaModelo(rostroRA);
-
                         }
 
-                        /*AugmentedFaceNode nodoRostro = new AugmentedFaceNode(rostroRA);
-                        nodoRostro.setFaceMeshTexture(texturaRostro);
-                        vistaEscenaRa.getScene().addChild(nodoRostro);
-                        nodosRostros.put(rostroRA, nodoRostro);*/
                     }
                     break;
 
@@ -294,6 +280,7 @@ public class FiltroFragment extends Fragment {
             vistaEscenaRa.getScene().removeChild(nodoRostroAR);
 
         }
+        cargadores.remove((Texture.builder()).setSource(getActivity(), Uri.parse(nombreFiltro)));
     }
 
     /**
@@ -369,24 +356,6 @@ public class FiltroFragment extends Fragment {
 
     }
 
-    /**
-     * Carga los modelos
-     */
-    private void loadModels() {
-
-        cargadores.add(ModelRenderable.builder()
-                .setSource(getActivity(), Uri.parse("fox.glb"))
-                .setIsFilamentGltf(true)
-                .build()
-                .thenAccept(model -> modeloRostro = model)
-                .exceptionally(throwable -> {
-                    Toast.makeText(getActivity(), "No pudo cargarse el rendereable",
-                            Toast.LENGTH_LONG).show();
-                    return null;
-                }));
-
-    }
-
 
     /**
      * Superpone la textura
@@ -397,50 +366,6 @@ public class FiltroFragment extends Fragment {
         nodoRostro.setFaceMeshTexture(texturaRostro);
         vistaEscenaRa.getScene().addChild(nodoRostro);
         nodosRostros.put(rostroRA, nodoRostro);
-
-    }
-
-    /**
-     * Metodo auxiliar para superponer la textura
-     */
-    private void aumentaModelo(AugmentedFace rostroRA) {
-
-        AugmentedFaceNode nodoRostro = new AugmentedFaceNode(rostroRA);
-
-        RenderableInstance modelo = nodoRostro.setFaceRegionsRenderable(modeloRostro);
-        modelo.setShadowCaster(false);
-        modelo.setShadowReceiver(true);
-        vistaEscenaRa.getScene().addChild(nodoRostro);
-        nodosRostros.put(rostroRA, nodoRostro);
-
-    }
-
-
-    /**
-     * Cambia los filtros aplicados
-     */
-    private void cambiaFiltro() {
-
-        if (texturaRostro == null && modeloRostro == null)
-            return;
-
-        cancelaCargadores();
-
-
-        for(AugmentedFace rostroAumentado : nodosRostros.keySet()) {
-
-            AugmentedFaceNode nodoRostroAR = nodosRostros.remove(rostroAumentado);
-            vistaEscenaRa.getScene().removeChild(nodoRostroAR);
-
-        }
-
-        if(texturaRostro != null) {
-            texturaRostro = null;
-            loadModels();
-        } else {
-            modeloRostro = null;
-            loadTextures();
-        }
 
     }
 
