@@ -30,15 +30,6 @@
             </intent-filter>
         </activity>
 
-        <!-- Actividad de la ventana del filtro -->
-        <activity
-            android:name=".FiltroActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-
         <meta-data
             android:name="com.google.ar.core"
             android:value="required" />
@@ -50,7 +41,7 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <!-- Actividad del menu -->
+        <!-- Actividad principal -->
         <activity
             android:name=".MainActivity"
             android:exported="false"

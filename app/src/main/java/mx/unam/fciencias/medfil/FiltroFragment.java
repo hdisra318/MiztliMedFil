@@ -151,6 +151,7 @@ public class FiltroFragment extends Fragment {
                     vistaEscenaRa.getScene().removeChild(nodoRostroAR);
 
                 }
+                texturaRostro = null;
                 filtroActivado = false;
 
 
@@ -280,7 +281,7 @@ public class FiltroFragment extends Fragment {
             vistaEscenaRa.getScene().removeChild(nodoRostroAR);
 
         }
-        cargadores.remove((Texture.builder()).setSource(getActivity(), Uri.parse(nombreFiltro)));
+        texturaRostro = null;
     }
 
     /**
