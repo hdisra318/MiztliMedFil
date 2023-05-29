@@ -30,6 +30,7 @@ public class SelecFiltroFragment extends Fragment {
     /** Bandera que indica si ya se mostro por primera vez en la aplicacion el dialogo */
     boolean firstStart;
 
+    /** Fragmento de la ventana del filtro */
     private FiltroFragment filtroFragment;
 
     @Override

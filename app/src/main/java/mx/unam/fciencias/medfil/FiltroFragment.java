@@ -200,7 +200,7 @@ public class FiltroFragment extends Fragment {
      */
     private void loadTextures() {
 
-        // Cargando 1 filtro Lupica
+        // Cargando 1 filtro
         cargadores.add((Texture.builder()).setSource(getActivity(), Uri.parse(nombreFiltro))
                 .setUsage(Texture.Usage.COLOR_MAP)
                 .build()
