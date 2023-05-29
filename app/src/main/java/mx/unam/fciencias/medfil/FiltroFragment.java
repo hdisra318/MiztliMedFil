@@ -70,6 +70,11 @@ public class FiltroFragment extends Fragment {
     /** Hashmap que relaciona un rostro detectado con su modelo RA */
     private final HashMap<AugmentedFace, AugmentedFaceNode> nodosRostros = new HashMap<>();
 
+    private final ArFrontFacingFragment AR_FRAGMENT;
+
+    /** Almacena el modelo 3D */
+    private ModelRenderable modeloRostro;
+
     /** Boton de captura de pantalla */
     private ImageButton botonCaptura;
 
@@ -85,8 +90,8 @@ public class FiltroFragment extends Fragment {
     /** Nombre del filtro */
     String nombreFiltro;
 
-    public FiltroFragment(String filtro){
-        this.nombreFiltro = filtro;
+    public FiltroFragment() {
+        AR_FRAGMENT = new ArFrontFacingFragment();
     }
 
     @Override
@@ -101,7 +106,7 @@ public class FiltroFragment extends Fragment {
 
             if (Sceneform.isSupported(getActivity())) {
                 getActivity().getSupportFragmentManager().beginTransaction().add(R.id.vista_ra_fl_1,
-                        ArFrontFacingFragment.class, null).commit();
+                        AR_FRAGMENT).commit();
             }
         }
 
@@ -180,6 +185,14 @@ public class FiltroFragment extends Fragment {
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
 
+    }
+
+    /**
+     * Define la textura a utilizar
+     * @param textureFile textura
+     */
+    public void setTextureFile(String textureFile) {
+        nombreFiltro = textureFile;
     }
 
     /**
@@ -281,7 +294,8 @@ public class FiltroFragment extends Fragment {
             vistaEscenaRa.getScene().removeChild(nodoRostroAR);
 
         }
-        texturaRostro = null;
+
+        getActivity().getSupportFragmentManager().beginTransaction().remove(AR_FRAGMENT).commit();
     }
 
     /**
