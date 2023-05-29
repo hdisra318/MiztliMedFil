@@ -30,6 +30,8 @@ public class SelecFiltroFragment extends Fragment {
     /** Bandera que indica si ya se mostro por primera vez en la aplicacion el dialogo */
     boolean firstStart;
 
+    private FiltroFragment filtroFragment;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +49,8 @@ public class SelecFiltroFragment extends Fragment {
             editor.putBoolean("firstStart", false);
             editor.apply();
         }
+
+        filtroFragment = new FiltroFragment();
 
     }
 
@@ -66,11 +70,17 @@ public class SelecFiltroFragment extends Fragment {
 
                 // Mostrando el fragmento del filtro segun el seleccionado
                 if (i == 0) {
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FiltroFragment("filtro_lupica.png")).commit();
+                    filtroFragment.setTextureFile("filtro_lupica.png");
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container, filtroFragment).commit();
                 }else if (i == 1) {
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FiltroFragment("filtro_ictericia.png")).commit();
+                    filtroFragment.setTextureFile("filtro_ictericia.png");
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container, filtroFragment).commit();
                 }else {
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FiltroFragment("filtro_lupica.png")).commit();
+                    filtroFragment.setTextureFile("filtro_lupica.png");
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container, filtroFragment).commit();
                 }
             }
         });
