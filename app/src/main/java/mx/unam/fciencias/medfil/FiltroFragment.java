@@ -70,6 +70,8 @@ public class FiltroFragment extends Fragment {
     /** Hashmap que relaciona un rostro detectado con su modelo RA */
     private final HashMap<AugmentedFace, AugmentedFaceNode> nodosRostros = new HashMap<>();
 
+    private final ArFrontFacingFragment AR_FRAGMENT;
+
     /** Almacena el modelo 3D */
     private ModelRenderable modeloRostro;
 
@@ -85,8 +87,12 @@ public class FiltroFragment extends Fragment {
     /** Boton Switch de activar/desactivar filtro */
     Switch activarFiltroBtn;
 
-    /** Bandera que indica si ya se presiono una vez el boton de informacion */
-    boolean unaVezInfo = false;
+    /** Nombre del filtro */
+    String nombreFiltro;
+
+    public FiltroFragment() {
+        AR_FRAGMENT = new ArFrontFacingFragment();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -100,7 +106,7 @@ public class FiltroFragment extends Fragment {
 
             if (Sceneform.isSupported(getActivity())) {
                 getActivity().getSupportFragmentManager().beginTransaction().add(R.id.vista_ra_fl_1,
-                        ArFrontFacingFragment.class, null).commit();
+                        AR_FRAGMENT).commit();
             }
         }
 
@@ -140,6 +146,9 @@ public class FiltroFragment extends Fragment {
 
                 System.out.println("Desactivado");
 
+                if (texturaRostro == null)
+                    return;
+
                 cancelaCargadores();
                 for(AugmentedFace rostroAumentado : nodosRostros.keySet()) {
 
@@ -147,6 +156,7 @@ public class FiltroFragment extends Fragment {
                     vistaEscenaRa.getScene().removeChild(nodoRostroAR);
 
                 }
+                texturaRostro = null;
                 filtroActivado = false;
 
 
@@ -178,12 +188,20 @@ public class FiltroFragment extends Fragment {
     }
 
     /**
+     * Define la textura a utilizar
+     * @param textureFile textura
+     */
+    public void setTextureFile(String textureFile) {
+        nombreFiltro = textureFile;
+    }
+
+    /**
      * Realiza la carga de la textura a superponer en el rostro.
      */
     private void loadTextures() {
 
-        // Cargando 1 filtro Lupica
-        cargadores.add((Texture.builder()).setSource(getActivity(), Uri.parse("filtro_lupica.png"))
+        // Cargando 1 filtro
+        cargadores.add((Texture.builder()).setSource(getActivity(), Uri.parse(nombreFiltro))
                 .setUsage(Texture.Usage.COLOR_MAP)
                 .build()
                 .thenAccept(texture -> texturaRostro = texture)
@@ -192,19 +210,16 @@ public class FiltroFragment extends Fragment {
                             Toast.LENGTH_LONG).show();
                     return null;
                 }));
-
-
-        // Para agregar mas filtros usar otro .add
     }
 
     /**
      * Registra los rostros detectados por la camara, revisa si ya fueron procesados y
-     * asociarlos con su modelo 3D o texturas. Y libera modelos que hayan salido de
+     * asociarlos con sus texturas. Y libera modelos que hayan salido de
      * la vista de la camara.
      */
     public void onAugmentedFaceTrackingUpdate(AugmentedFace rostroRA) {
 
-        if(texturaRostro == null && modeloRostro == null)
+        if(texturaRostro == null)
             return;
 
         AugmentedFaceNode nodoRostroExistente = nodosRostros.get(rostroRA);
@@ -225,16 +240,8 @@ public class FiltroFragment extends Fragment {
 
                             aumentaTextura(rostroRA);
 
-                        } else {
-
-                            aumentaModelo(rostroRA);
-
                         }
 
-                        /*AugmentedFaceNode nodoRostro = new AugmentedFaceNode(rostroRA);
-                        nodoRostro.setFaceMeshTexture(texturaRostro);
-                        vistaEscenaRa.getScene().addChild(nodoRostro);
-                        nodosRostros.put(rostroRA, nodoRostro);*/
                     }
                     break;
 
@@ -281,6 +288,14 @@ public class FiltroFragment extends Fragment {
         super.onDestroy();
 
         cancelaCargadores();
+        for(AugmentedFace rostroAumentado : nodosRostros.keySet()) {
+
+            AugmentedFaceNode nodoRostroAR = nodosRostros.remove(rostroAumentado);
+            vistaEscenaRa.getScene().removeChild(nodoRostroAR);
+
+        }
+
+        getActivity().getSupportFragmentManager().beginTransaction().remove(AR_FRAGMENT).commit();
     }
 
     /**
@@ -325,7 +340,7 @@ public class FiltroFragment extends Fragment {
 
             } else {
 
-                Toast.makeText(getActivity(), "No se pudo realizazr la captura", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "No se pudo realizar la captura", Toast.LENGTH_LONG).show();
 
             }
 
@@ -356,24 +371,6 @@ public class FiltroFragment extends Fragment {
 
     }
 
-    /**
-     * Carga los modelos
-     */
-    private void loadModels() {
-
-        cargadores.add(ModelRenderable.builder()
-                .setSource(getActivity(), Uri.parse("fox.glb"))
-                .setIsFilamentGltf(true)
-                .build()
-                .thenAccept(model -> modeloRostro = model)
-                .exceptionally(throwable -> {
-                    Toast.makeText(getActivity(), "No pudo cargarse el rendereable",
-                            Toast.LENGTH_LONG).show();
-                    return null;
-                }));
-
-    }
-
 
     /**
      * Superpone la textura
@@ -384,50 +381,6 @@ public class FiltroFragment extends Fragment {
         nodoRostro.setFaceMeshTexture(texturaRostro);
         vistaEscenaRa.getScene().addChild(nodoRostro);
         nodosRostros.put(rostroRA, nodoRostro);
-
-    }
-
-    /**
-     * Metodo auxiliar para superponer la textura
-     */
-    private void aumentaModelo(AugmentedFace rostroRA) {
-
-        AugmentedFaceNode nodoRostro = new AugmentedFaceNode(rostroRA);
-
-        RenderableInstance modelo = nodoRostro.setFaceRegionsRenderable(modeloRostro);
-        modelo.setShadowCaster(false);
-        modelo.setShadowReceiver(true);
-        vistaEscenaRa.getScene().addChild(nodoRostro);
-        nodosRostros.put(rostroRA, nodoRostro);
-
-    }
-
-
-    /**
-     * Cambia los filtros aplicados
-     */
-    private void cambiaFiltro() {
-
-        if (texturaRostro == null && modeloRostro == null)
-            return;
-
-        cancelaCargadores();
-
-
-        for(AugmentedFace rostroAumentado : nodosRostros.keySet()) {
-
-            AugmentedFaceNode nodoRostroAR = nodosRostros.remove(rostroAumentado);
-            vistaEscenaRa.getScene().removeChild(nodoRostroAR);
-
-        }
-
-        if(texturaRostro != null) {
-            texturaRostro = null;
-            loadModels();
-        } else {
-            modeloRostro = null;
-            loadTextures();
-        }
 
     }
 
@@ -450,21 +403,52 @@ public class FiltroFragment extends Fragment {
         dialog.setContentView(R.layout.filtro_info_layout);
 
         ImageView cancelBtn = dialog.findViewById(R.id.cancelButton);
-        LinearLayout infoText = dialog.findViewById(R.id.layoutInfoText);
+        LinearLayout infoTextCont = dialog.findViewById(R.id.layoutInfoText);
         TextView textoEnfermedad = dialog.findViewById(R.id.textoEnf);
         TextView nombreEnfermedad = dialog.findViewById(R.id.nombreEnf);
 
-        // Agregando texto de la informacion de la enferemdad
-        nombreEnfermedad.setText("Lupus eritematoso");
 
-        String info = "Se presenta en el lupus vulgar y en menos frecuencia, en el lupus eritematoso\n"+
-                "Características:\n\n"+
-                "1. Eritema malar: eritema fijo, plano o elevado, sobre las prominencias malares, sin afectación de los pliegues nasolabiales.\n"+
-                "2. Erupción discoide: placas eritematosas elevadas con descamación queratósica adherente; en lesiones antiguas, puede ocurrir cicatrización atrófica.\n"+
-                "3. Fotosensibilidad: erupción cutánea como resultado de una reacción inusual a los rayos solares, por historia u observación del médico.\n"+
-                "4. Úlceras orales: ulceración oral o nasofaríngea, usualmente indolora, observada por el médico.\n";
+        if(nombreFiltro == "filtro_lupica.png") {
+            // Agregando texto de la informacion de la enferemdad Lupica
+            nombreEnfermedad.setText("Lupus eritematoso");
 
-        textoEnfermedad.setText(info);
+            String infoLupica = "Se presenta en el lupus vulgar y en menos frecuencia, en el lupus eritematoso\n\n"+
+                    "Características:\n\n"+
+                    "1. Eritema malar: eritema fijo, plano o elevado, sobre las prominencias malares, sin afectación de los pliegues nasolabiales.\n"+
+                    "2. Erupción discoide: placas eritematosas elevadas con descamación queratósica adherente; en lesiones antiguas, puede ocurrir cicatrización atrófica.\n"+
+                    "3. Fotosensibilidad: erupción cutánea como resultado de una reacción inusual a los rayos solares, por historia u observación del médico.\n"+
+                    "4. Úlceras orales: ulceración oral o nasofaríngea, usualmente indolora, observada por el médico.\n";
+
+            textoEnfermedad.setText(infoLupica);
+
+        } else if (nombreFiltro == "filtro_ictericia.png") {
+
+            // Agregando texto de la informacion de la enferemdad Lupica
+            nombreEnfermedad.setText("Ictericia");
+
+            String infoIctericia = "Es una coloración amarilla en la piel, las membranas mucosas o los ojos. El color amarillo proviene de la bilirrubina, un subproducto de los glóbulos rojos viejos.\n"+
+                    "\nCausas:\n\n"+
+                    "1. Hay demasiados glóbulos rojos que están muriendo o descomponiéndose y pasando al hígado.\n"+
+                    "2. El hígado está sobrecargado o presenta daño.\n"+
+                    "3. La bilirrubina del hígado es incapaz de movilizarse adecuadamente hacia el tubo digestivo.\n";
+
+            textoEnfermedad.setText(infoIctericia);
+
+        } else {
+
+            // Agregando texto de la informacion de la enferemdad Lupica para los demas filtros
+            nombreEnfermedad.setText("Lupus eritematoso");
+
+            String infoLupica = "Se presenta en el lupus vulgar y en menos frecuencia, en el lupus eritematoso\n\n"+
+                    "Características:\n\n"+
+                    "1. Eritema malar: eritema fijo, plano o elevado, sobre las prominencias malares, sin afectación de los pliegues nasolabiales.\n"+
+                    "2. Erupción discoide: placas eritematosas elevadas con descamación queratósica adherente; en lesiones antiguas, puede ocurrir cicatrización atrófica.\n"+
+                    "3. Fotosensibilidad: erupción cutánea como resultado de una reacción inusual a los rayos solares, por historia u observación del médico.\n"+
+                    "4. Úlceras orales: ulceración oral o nasofaríngea, usualmente indolora, observada por el médico.\n";
+
+            textoEnfermedad.setText(infoLupica);
+        }
+
 
         // Accion del boton para quitar el dialogo
         cancelBtn.setOnClickListener(new View.OnClickListener() {

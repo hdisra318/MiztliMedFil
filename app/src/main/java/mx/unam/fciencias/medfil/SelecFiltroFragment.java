@@ -22,13 +22,16 @@ public class SelecFiltroFragment extends Fragment {
     GridView grid;
 
     /** Imagenes de los filtros */
-    int[] filtros = {R.drawable.img_lupica, R.drawable.img_varicela, R.drawable.img_sindrome_down};
+    int[] filtros = {R.drawable.img_lupica, R.drawable.img_ictericia, R.drawable.img_varicela, R.drawable.img_sindrome_down};
 
     /** Referencia al dialogo de bienvenida */
     private DialogoPersonalizado dialogoPersonalizado;
 
     /** Bandera que indica si ya se mostro por primera vez en la aplicacion el dialogo */
     boolean firstStart;
+
+    /** Fragmento de la ventana del filtro */
+    private FiltroFragment filtroFragment;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,6 +51,8 @@ public class SelecFiltroFragment extends Fragment {
             editor.apply();
         }
 
+        filtroFragment = new FiltroFragment();
+
     }
 
     @Override
@@ -64,8 +69,20 @@ public class SelecFiltroFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                // Mostrando el fragmento del filtro
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FiltroFragment()).commit();
+                // Mostrando el fragmento del filtro segun el seleccionado
+                if (i == 0) {
+                    filtroFragment.setTextureFile("filtro_lupica.png");
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container, filtroFragment).commit();
+                }else if (i == 1) {
+                    filtroFragment.setTextureFile("filtro_ictericia.png");
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container, filtroFragment).commit();
+                }else {
+                    filtroFragment.setTextureFile("filtro_lupica.png");
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container, filtroFragment).commit();
+                }
             }
         });
 
