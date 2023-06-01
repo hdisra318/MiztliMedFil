@@ -4,5 +4,5 @@ Proyecto de aplicación realizada para la materia de Programación de Dispositiv
 > Integrantes:
 - Israel Hernandez Dorantes
 - Juan Manuel Lucio Rangel
-- Ruben
+- Ruben Acosta Arzate
 - Frida Huitrón Badillo
